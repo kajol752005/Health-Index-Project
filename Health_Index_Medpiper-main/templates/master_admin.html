@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master Admin - Phone Number History</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #333;
+            margin: 0;
+        }
+        .search-form {
+            display: flex;
+        }
+        .search-form input[type="text"] {
+            padding: 10px;
+            width: 350px;
+            margin-right: 5px;
+        }
+        .search-form input[type="submit"] {
+            padding: 5px 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .output-btn {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 2px 2px;
+            cursor: pointer;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Master Admin View</h1>
+        <form class="search-form" action="{{ url_for('master_admin') }}" method="get">
+            <input type="text" name="search" placeholder="Search by Phone Number or City" value="{{ search_query }}">
+            <input type="submit" value="Search">
+        </form>
+    </div><br><br>
+
+    {% if history %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Phone Number</th>
+                    <th>Timestamp</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in history %}
+                <tr>
+                    <td>{{ entry[0] }}</td>
+                    <td>{{ entry[1] }}</td>
+                    <td>{{ entry[2] }}</td>
+                    <td>{{ entry[3] }}</td>
+                    <td><button class="output-btn" data-index="{{ loop.index0 }}">Output</button></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No results found.</p>
+    {% endif %}
+
+    <div id="outputModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Entry Details</h2>
+            <div id="outputContent"></div>
+        </div>
+    </div>
+
+    <!-- Separate script for initializing data -->
+    <script type="text/javascript">
+        var historyData = {{ history|tojson|safe }};
+    </script>
+
+    <!-- Main script -->
+    <script type="text/javascript">
+        var modal = document.getElementById("outputModal");
+        var span = document.getElementsByClassName("close")[0];
+
+        function showOutput(index) {
+            var entry = historyData[index];
+            var content = `
+                <p><strong>Phone Number:</strong> ${entry[0]}</p>
+                <p><strong>Timestamp:</strong> ${entry[1]}</p>
+                <p><strong>City:</strong> ${entry[2]}</p>
+                <p><strong>State:</strong> ${entry[3]}</p>
+                <p><strong>AQI:</strong> ${entry[4] || 'N/A'}</p>
+                <p><strong>Temperature:</strong> ${entry[5] ? entry[5] + ' °C' : 'N/A'}</p>
+                <p><strong>Weather Conditions:</strong> ${entry[6] || 'N/A'}</p>
+                <p><strong>Population:</strong> ${entry[7] || 'N/A'}</p>
+                <p><strong>Diseases:</strong> ${entry[8] || 'N/A'}</p>
+                <p><strong>Health Checkups:</strong> ${entry[9] || 'N/A'}</p>
+            `;
+            document.getElementById("outputContent").innerHTML = content;
+            modal.style.display = "block";
+        }
+
+        // Add click event listeners to all output buttons
+        document.querySelectorAll('.output-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                var index = this.getAttribute('data-index');
+                showOutput(parseInt(index));
+            });
+        });
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+flask
+flask_sqlalchemy
+psycopg2-binary
+flask_migrate
+pandas
+requests
+OTPLessAuthSDK
+flask-cors

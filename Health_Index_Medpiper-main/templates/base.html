@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+  <title>Medpiper Health</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    .timer {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav class="section__container nav__container">
+      <div class="nav__logo">Medpiper<span>Health</span></div>
+      <ul class="nav__links">
+        <li class="link"><a href="#">Home</a></li>
+        <li class="link"><a href="#">Blog</a></li>
+        <li class="link"><a href="#">Sandbox</a></li>
+        <li class="link"><a href="#">Contact Us</a></li>
+      </ul>
+
+      <button class="btn">
+        <a href="{{ url_for('history') }}" onclick="submitPhoneNumber(event)">History</a>
+      </button>
+    </nav>
+    <div class="section__container header__container">
+      <div class="header__content">
+        <h1>Providing an Exceptional Health Guidance!</h1>
+        <p>
+          <br>
+          Unlock personalized health insights with our innovative platform.
+          Enter your details to access a world of wellness tailored just for you.
+          Experience cutting-edge technology that puts your health first.
+          <br><br>
+          Stay informed with real-time updates on weather and air quality.
+          Make smart decisions about your daily activities based on environmental data.
+          Empower yourself with knowledge to protect your well-being.
+          <br><br>
+          Explore your community's health landscape and demographics.
+          Discover local health risks and recommended checkups based on your location.
+          Stay ahead in your wellness journey with tailored insights.
+          <br><br>
+          Access your health history instantly with our user-friendly interface.
+          Track your progress and review past data securely.
+          Make informed decisions for a healthier future with ease.
+        </p>
+      </div>
+
+      <div class="header__form">
+        <form id="otpForm">
+        <label for="age">Age:</label>
+          <input type="number" id="age" name="age" min="1" max="150" required>
+
+          <label for="gender">Gender:</label>
+          <select id="gender" name="gender" required>
+            <option value=""></option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+
+          <label for="city">City:</label>
+          <select id="city" name="city" required>
+            <option value=""></option>
+            <option value="Agartala">Agartala</option>
+            <option value="Agra">Agra</option>
+            <option value="Ahmedabad">Ahmedabad</option>
+            <option value="Aizawl">Aizawl</option>
+            <option value="Ajmer">Ajmer</option>
+            <option value="Allahabad">Allahabad</option>
+            <option value="Amritsar">Amritsar</option>
+            <option value="Asansol">Asansol</option>
+            <option value="Aurangabad">Aurangabad</option>
+            <option value="Bathinda">Bathinda</option>
+            <option value="Bengaluru">Bengaluru</option>
+            <option value="Belgaum">Belgaum</option>
+            <option value="Bharatpur">Bharatpur</option>
+            <option value="Bhilai">Bhilai</option>
+            <option value="Bhopal">Bhopal</option>
+            <option value="Bhubaneswar">Bhubaneswar</option>
+            <option value="Bhagalpur">Bhagalpur</option>
+            <option value="Bijapur">Bijapur</option>
+            <option value="Bikaner">Bikaner</option>
+            <option value="Bilaspur">Bilaspur</option>
+            <option value="Borivli">Borivli</option>
+            <option value="Chennai">Chennai</option>
+            <option value="Chittoor">Chittoor</option>
+            <option value="Coimbatore">Coimbatore</option>
+            <option value="Cuddalore">Cuddalore</option>
+            <option value="Cuttack">Cuttack</option>
+            <option value="Dewas">Dewas</option>
+            <option value="Delhi">Delhi</option>
+            <option value="Durgapur">Durgapur</option>
+            <option value="Faridabad">Faridabad</option>
+            <option value="Gangtok">Gangtok</option>
+            <option value="Gaya">Gaya</option>
+            <option value="Ghaziabad">Ghaziabad</option>
+            <option value="Gulbarga">Gulbarga</option>
+            <option value="Gurugram">Gurugram</option>
+            <option value="Guwahati">Guwahati</option>
+            <option value="Gwalior">Gwalior</option>
+            <option value="Hajipur">Hajipur</option>
+            <option value="Hisar">Hisar</option>
+            <option value="Howrah">Howrah</option>
+            <option value="Hubli">Hubli</option>
+            <option value="Hyderabad">Hyderabad</option>
+            <option value="Indore">Indore</option>
+            <option value="Jaipur">Jaipur</option>
+            <option value="Jalandhar">Jalandhar</option>
+            <option value="Jabalpur">Jabalpur</option>
+            <option value="Jodhpur">Jodhpur</option>
+            <option value="Kanpur">Kanpur</option>
+            <option value="Kolkata">Kolkata</option>
+            <option value="Kollam">Kollam</option>
+            <option value="Korba">Korba</option>
+            <option value="Kota">Kota</option>
+            <option value="Kohima">Kohima</option>
+            <option value="Lucknow">Lucknow</option>
+            <option value="Ludhiana">Ludhiana</option>
+            <option value="Madurai">Madurai</option>
+            <option value="Mangalore">Mangalore</option>
+            <option value="Meerut">Meerut</option>
+            <option value="Muzaffarpur">Muzaffarpur</option>
+            <option value="Mumbai">Mumbai</option>
+            <option value="Mysore">Mysore</option>
+            <option value="Nagpur">Nagpur</option>
+            <option value="Nashik">Nashik</option>
+            <option value="Navi Mumbai">Navi Mumbai</option>
+            <option value="Noida">Noida</option>
+            <option value="Panchkula">Panchkula</option>
+            <option value="Patiala">Patiala</option>
+            <option value="Patna">Patna</option>
+            <option value="Pune">Pune</option>
+            <option value="Raipur">Raipur</option>
+            <option value="Rajamahendravaram">Rajamahendravaram</option>
+            <option value="Rohtak">Rohtak</option>
+            <option value="Satna">Satna</option>
+            <option value="Shillong">Shillong</option>
+            <option value="Shimoga">Shimoga</option>
+            <option value="Silchar">Silchar</option>
+            <option value="Siliguri">Siliguri</option>
+            <option value="Sonipat">Sonipat</option>
+            <option value="Surat">Surat</option>
+            <option value="Thane">Thane</option>
+            <option value="Thiruvananthapuram">Thiruvananthapuram</option>
+            <option value="Tiruchirappalli">Tiruchirappalli</option>
+            <option value="Tirupati">Tirupati</option>
+            <option value="Tirunelveli">Tirunelveli</option>
+            <option value="Udaipur">Udaipur</option>
+            <option value="Ujjain">Ujjain</option>
+            <option value="Varanasi">Varanasi</option>
+            <option value="Vellore">Vellore</option>
+            <option value="Vijayawada">Vijayawada</option>
+            <option value="Visakhapatnam">Visakhapatnam</option>
+          </select>
+
+
+          <label for="state">State:</label>
+          <select id="state" name="state" required>
+            <option value=""></option>
+            <option value="">Select a state</option>
+            <option value="Andaman & Nicobar Island">Andaman & Nicobar Island</option>
+            <option value="Andhra Pradesh">Andhra Pradesh</option>
+            <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+            <option value="Assam">Assam</option>
+            <option value="Bihar">Bihar</option>
+            <option value="Chandigarh">Chandigarh</option>
+            <option value="Chhattisgarh">Chhattisgarh</option>
+            <option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option>
+            <option value="Daman and Diu">Daman and Diu</option>
+            <option value="Delhi">Delhi</option>
+            <option value="Goa">Goa</option>
+            <option value="Gujarat">Gujarat</option>
+            <option value="Haryana">Haryana</option>
+            <option value="Himachal Pradesh">Himachal Pradesh</option>
+            <option value="Jammu & Kashmir">Jammu and Kashmir</option>
+            <option value="Jharkhand">Jharkhand</option>
+            <option value="Karnataka">Karnataka</option>
+            <option value="Kerala">Kerala</option>
+            <option value="Lakshadweep">Lakshadweep</option>
+            <option value="Ladakh">Ladakh</option>
+            <option value="Madhya Pradesh">Madhya Pradesh</option>
+            <option value="Maharashtra">Maharashtra</option>
+            <option value="Manipur">Manipur</option>
+            <option value="Meghalaya">Meghalaya</option>
+            <option value="Mizoram">Mizoram</option>
+            <option value="Nagaland">Nagaland</option>
+            <option value="Odisha">Odisha</option>
+            <option value="Puducherry">Puducherry</option>
+            <option value="Punjab">Punjab</option>
+            <option value="Rajasthan">Rajasthan</option>
+            <option value="Sikkim">Sikkim</option>
+            <option value="Tamil Nadu">Tamil Nadu</option>
+            <option value="Telangana">Telangana</option>
+            <option value="Tripura">Tripura</option>
+            <option value="Uttar Pradesh">Uttar Pradesh</option>
+            <option value="Uttarakhand">Uttarakhand</option>
+            <option value="West Bengal">West Bengal</option>
+          </select>
+          <button type="button" onclick="submitForm()" class="btn btn-small">Submit</button>
+
+          <label for="countryCode">Country Code:</label>
+          <select id="countryCode" name="countryCode" required>
+            <option value=""></option>
+            <option value="+91">+91 (India)</option>
+            <option value="+1">+1 (USA/Canada)</option>
+
+          </select>
+
+          <label for="phoneNumber">Phone No.:</label>
+          <input type="tel" id="phoneNumber" name="phoneNumber" required>
+
+          <button type="button" onclick="sendOTP()" class="btn btn-small">Send OTP</button>
+          <label for="otp">Enter OTP:</label>
+          <input type="text" id="otp" name="otp" required><br>
+          <button type="button" onclick="verifyOTP()" class="btn btn-small">Verify OTP</button>
+          <button type="button" onclick="resendOTP()" class="btn btn-small">Resend OTP</button>
+        </form>
+
+        <div id="otp-section">
+          <div class="timer" id="timer">Resend OTP in <span id="countdown"></span> seconds</div>
+        </div>
+
+        <div id="result"></div>
+      </div>
+
+
+    </div>
+    </div>
+  </header>
+  <br><br><br>
+  <div class="circle-container">
+    <div class="circle-item">
+      <div class="circle">
+        <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor" class="bi bi-feather"
+          viewBox="0 0 16 16">
+          <path
+            d="M15.807.531c-.174-.177-.41-.289-.64-.363a3.8 3.8 0 0 0-.833-.15c-.62-.049-1.394 0-2.252.175C10.365.545 8.264 1.415 6.315 3.1S3.147 6.824 2.557 8.523c-.294.847-.44 1.634-.429 2.268.005.316.05.62.154.88q.025.061.056.122A68 68 0 0 0 .08 15.198a.53.53 0 0 0 .157.72.504.504 0 0 0 .705-.16 68 68 0 0 1 2.158-3.26c.285.141.616.195.958.182.513-.02 1.098-.188 1.723-.49 1.25-.605 2.744-1.787 4.303-3.642l1.518-1.55a.53.53 0 0 0 0-.739l-.729-.744 1.311.209a.5.5 0 0 0 .443-.15l.663-.684c.663-.68 1.292-1.325 1.763-1.892.314-.378.585-.752.754-1.107.163-.345.278-.773.112-1.188a.5.5 0 0 0-.112-.172M3.733 11.62C5.385 9.374 7.24 7.215 9.309 5.394l1.21 1.234-1.171 1.196-.027.03c-1.5 1.789-2.891 2.867-3.977 3.393-.544.263-.99.378-1.324.39a1.3 1.3 0 0 1-.287-.018Zm6.769-7.22c1.31-1.028 2.7-1.914 4.172-2.6a7 7 0 0 1-.4.523c-.442.533-1.028 1.134-1.681 1.804l-.51.524zm3.346-3.357C9.594 3.147 6.045 6.8 3.149 10.678c.007-.464.121-1.086.37-1.806.533-1.535 1.65-3.415 3.455-4.976 1.807-1.561 3.746-2.36 5.31-2.68a8 8 0 0 1 1.564-.173" />
+        </svg>
+      </div>
+      <br>
+      <div class="circle-box">
+        <h3>Air Quality Index</h3>
+        <br><br>
+      </div>
+    </div>
+
+    <div class="circle-item">
+      <div class="circle">
+        <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor" class="bi bi-clouds-fill"
+          viewBox="0 0 16 16">
+          <path d="M11.473 9a4.5 4.5 0 0 0-8.72-.99A3 3 0 0 0 3 14h8.5a2.5 2.5 0 1 0-.027-5" />
+          <path
+            d="M14.544 9.772a3.5 3.5 0 0 0-2.225-1.676 5.5 5.5 0 0 0-6.337-4.002 4.002 4.002 0 0 1 7.392.91 2.5 2.5 0 0 1 1.17 4.769z" />
+        </svg>
+      </div>
+      <br>
+      <div class="circle-box">
+        <h3>Weather Conditions</h3>
+        <br><br>
+      </div>
+    </div>
+
+    <div class="circle-item">
+      <div class="circle">
+        <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="currentColor" class="bi bi-people-fill"
+          viewBox="0 0 16 16">
+          <path
+            d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.24 2.24 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.3 6.3 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5" />
+        </svg>
+      </div>
+      <br>
+      <div class="circle-box" id="population-box">
+        <h3>Population Data</h3>
+        <br><br>
+      </div>
+    </div>
+  </div>
+
+  <button id="health-risks-btn" class="btn btn-small btn-health-risks">Health Risks</button>
+
+  <div id="health-risks-info" style="display: none;">
+    <h3>Health Risks Information</h3>
+    <table id="health-risks-table" class="table table-striped">
+      <thead>
+        <tr>
+          <th>Conditions</th>
+          <th>Diseases</th>
+          <th>Recommended Health Checkups</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr id="air-quality-row"></tr>
+        <tr id="weather-row"></tr>
+        <tr id="population-row"></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    let orderId;
+    let countdownInterval;
+
+    function submitForm() {
+      const age = document.getElementById('age').value;
+      const gender = document.getElementById('gender').value;
+      const city = document.getElementById('city').value;
+      const state = document.getElementById('state').value;
+
+      const data = {
+        age: parseInt(age),
+        gender: gender,
+        city: city,
+        state: state
+      };
+
+      fetch('/submit_info', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.status === "success") {
+            showMessage("Information submitted successfully! You can now enter your phone number and send OTP.");
+          } else {
+            showMessage("Error: " + data.message);
+          }
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+          showMessage("An error occurred while submitting the information.");
+        });
+    }
+
+    function filterCountryCodes() {
+      var input, filter, select, options, i, txtValue;
+      input = document.getElementById('countryCodeSearch');
+      filter = input.value.toUpperCase();
+      select = document.getElementById('countryCode');
+      options = select.getElementsByTagName('option');
+
+      for (i = 0; i < options.length; i++) {
+        txtValue = options[i].text;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          options[i].style.display = "";
+        } else {
+          options[i].style.display = "none";
+        }
+      }
+    }
+
+    function getFullPhoneNumber() {
+      const countryCode = document.getElementById('countryCode').value;
+      const phoneNumber = document.getElementById('phoneNumber').value;
+      return countryCode + phoneNumber;
+    }
+
+    function sendOTP() {
+      const fullPhoneNumber = getFullPhoneNumber();
+
+      const data = {
+        phoneNumber: fullPhoneNumber
+      };
+
+      fetch('/send_otp', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.status === "success") {
+            orderId = data.orderId;
+            startTimer();
+            showOTPSection();
+            showMessage("OTP sent successfully!");
+          } else {
+            showMessage("Error: " + data.message);
+          }
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+          showMessage("An error occurred while sending the OTP.");
+        });
+    }
+
+
+
+    function showOTPSection() {
+      document.getElementById('otp-section').style.display = 'block';
+    }
+
+    function showMessage(message) {
+      document.getElementById('result').innerText = message;
+    }
+
+    function startTimer() {
+      let timeLeft = 300; // 5 minutes in seconds
+      countdownInterval = setInterval(function () {
+        timeLeft--;
+        if (timeLeft < 0) {
+          clearInterval(countdownInterval);
+          document.getElementById('timer').style.display = 'none';
+        } else {
+          document.getElementById('countdown').innerText = timeLeft + 's';
+        }
+      }, 1000);
+      document.getElementById('timer').style.display = 'block';
+    }
+
+    function stopTimer() {
+      clearInterval(countdownInterval);
+    }
+
+    function verifyOTP() {
+      const otp = document.getElementById('otp').value;
+      const fullPhoneNumber = getFullPhoneNumber();
+      const city = document.getElementById('city').value;
+      const state = document.getElementById('state').value;
+
+      const data = {
+        orderId: orderId,
+        otp: otp,
+        phoneNumber: fullPhoneNumber,
+        city: city,
+        state: state
+      };
+
+      fetch('/verify_otp', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log("Full response data:", data);
+
+          if (data.status === "success") {
+            showMessage("OTP verified successfully!");
+
+            // Update Weather Conditions box
+            if (data.weather_data) {
+              const weather = data.weather_data;
+              const weatherBox = document.querySelector('.circle-item:nth-child(2) .circle-box');
+              weatherBox.innerHTML = `
+            <h3>Weather in ${city}</h3>
+            <div class="weather-info">
+              <div class="weather-details">
+                <p class="feels-like">Feels like: ${weather.main.feels_like}°C</p>
+                <p class="humidity">Humidity: ${weather.main.humidity}%</p>
+                <p class="wind">Wind Speed: ${weather.wind.speed} m/s</p>
+                <p class="description">Weather: ${weather.weather[0].description}</p>
+              </div>
+              <div class="temperature-main">
+                <div class="temperature-value" style="font-size: 2rem; font-weight: 700;">${weather.main.temp}°C</div>
+                <div class="temperature-label"></div>
+              </div>
+            </div>
+          `;
+            } else {
+              const weatherBox = document.querySelector('.circle-item:nth-child(2) .circle-box');
+              weatherBox.innerHTML = `<h3>Weather data not available for ${city}</h3>`;
+            }
+
+            // Update Air Quality box
+            if (data.air_quality_data) {
+              const airQuality = data.air_quality_data;
+              const airQualityBox = document.querySelector('.circle-item:nth-child(1) .circle-box');
+              airQualityBox.innerHTML = `
+            <h3>Air Quality in ${city}</h3>
+            <div class="aqi-info">
+              <div class="aqi-details">
+                <p><span class="aqi-color-circle ${airQuality.color}"></span>${airQuality.category}</p>
+                <p class="pollutant">Main Pollutant: ${airQuality.main_pollutant}</p>
+                <p class="message">${getAqiInfo(airQuality.aqi).message}</p>
+              </div>
+              <div class="aqi-main">
+                <div class="aqi-value" style="font-size: 2.5rem; font-weight: 700;">${airQuality.aqi}</div>
+                <div class="aqi-label"></div>
+              </div>
+            </div>
+          `;
+            } else {
+              const airQualityBox = document.querySelector('.circle-item:nth-child(1) .circle-box');
+              airQualityBox.innerHTML = `<h3>Air quality data not available for ${city}</h3>`;
+            }
+
+            // Update Population box
+            if (data.population_data) {
+              const populationBox = document.querySelector('#population-box');
+              populationBox.innerHTML = `
+            <h3>Population in ${city}</h3>
+            <div class="population-info">
+              <div class="population-details">
+                <p>Population: ${data.population_data.population.toLocaleString()}</p>
+                <p>Latitude: ${data.population_data.latitude.toFixed(4)}</p>
+                <p>Longitude: ${data.population_data.longitude.toFixed(4)}</p>
+              </div>
+              <div class="country-main">
+                <div class="country-value" style="font-size: 2.5rem; font-weight: 700;"> ${data.population_data.country}</div>
+              </div>                                                                   
+            </div>
+          `;
+            } else {
+              const populationBox = document.querySelector('#population-box');
+              populationBox.innerHTML = `<h3>Population data not available for ${city}</h3>`;
+            }
+
+            stopTimer();
+          } else {
+            showMessage("Error: " + data.message);
+          }
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+          showMessage("An error occurred while verifying the OTP.");
+        });
+    }
+    function getAqiInfo(aqi) {
+      if (0 <= aqi && aqi <= 50) {
+        return {category: "Good", color: "good", message: "Breathe easy, the air quality is refreshing!"};
+      } else if (51 <= aqi && aqi <= 100) {
+        return {category: "Moderate", color: "moderate", message: "Enjoy the outdoors comfortably today!"};
+      } else if (101 <= aqi && aqi <= 150) {
+        return {category: "Unhealthy for Sensitive Groups", color: "unhealthy-sensitive", message: "Sensitive groups may want to take it easy today!"};
+      } else if (151 <= aqi && aqi <= 200) {
+        return {category: "Unhealthy", color: "unhealthy", message: "Limit outdoor activities, especially if you have respiratory issues!"};
+      } else if (201 <= aqi && aqi <= 300) {
+        return {category: "Very Unhealthy", color: "very-unhealthy", message: "Stay indoors and avoid strenuous activities!"};
+      } else if (aqi >= 301) {
+        return {category: "Hazardous", color: "hazardous", message: "Dangerous air quality, please stay indoors!"};
+      } else {
+        return {category: "Unknown", color: "unknown", message: "Unknown air quality status!"};
+      }
+    }
+
+    function updateAirQualityDisplay(category, color) {
+      const aqiDisplay = document.getElementById('aqi-display');
+      aqiDisplay.innerHTML = `
+    <div class="box ${color}"></div>
+    <span>${category}</span>
+  `;
+    }
+
+    function resendOTP() {
+      const fullPhoneNumber = getFullPhoneNumber();
+
+      const data = {
+        phoneNumber: fullPhoneNumber
+      };
+
+      fetch('/resend_otp', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.status === "success") {
+            orderId = data.orderId;
+            startTimer();
+            showMessage("OTP resent successfully!");
+          } else {
+            showMessage("Error: " + data.message);
+          }
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+          showMessage("An error occurred while resending the OTP.");
+        });
+    }
+
+    function submitPhoneNumber(event) {
+      event.preventDefault();
+      const fullPhoneNumber = getFullPhoneNumber();
+      if (fullPhoneNumber) {
+        const form = document.createElement('form');
+        form.method = 'post';
+        form.action = "{{ url_for('history') }}";
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'phone_number';
+        input.value = fullPhoneNumber;
+        form.appendChild(input);
+        document.body.appendChild(form);
+        form.submit();
+      } else {
+        alert('Please enter your phone number first.');
+      }
+    }
+
+    document.getElementById('health-risks-btn').addEventListener('click', function () {
+      fetch('/health_risk')
+        .then(response => response.json())
+        .then(data => {
+          const healthRisksInfo = document.getElementById('health-risks-info');
+          healthRisksInfo.style.display = 'block';
+
+          data.forEach(item => {
+            let row;
+            switch (item.type) {
+              case 'Air Quality':
+                row = document.getElementById('air-quality-row');
+                break;
+              case 'Weather Conditions':
+                row = document.getElementById('weather-row');
+                break;
+              case 'Population Data':
+                row = document.getElementById('population-row');
+                break;
+            }
+
+            if (row) {
+              row.innerHTML = `
+            <td>${item.type}</td>
+            <td>${item.diseases}</td>
+            <td>${item.health_checkup}</td>
+          `;
+            }
+          });
+        })
+        .catch(error => console.error('Error:', error));
+    });
+
+  </script>
+</body>
+
+</html>

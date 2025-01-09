@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User History</title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='history.css')}}">
+</head>
+<body>
+    <h1>User History</h1>
+    
+    {% if url_history %}
+        
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>S.No.</th>
+                    <th>Age</th>
+                    <th>Gender</th>
+                    <th>City</th>
+                    <th>Phone Number</th>
+                    <th>Order Id</th>
+                    <th>Time</th>
+                    <th>State</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in url_history %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ entry[1] }}</td>
+                    <td>{{ entry[2] }}</td>
+                    <td>{{ entry[3] }}</td>
+                    <td>{{ entry[4] }}</td>
+                    <td>{{ entry[5] }}</td>
+                    <td>{{ entry[6] }}</td>
+                    <td>{{ entry[7] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No history found for your phone number.</p>
+    {% endif %}
+    
+    <a href="/">Back to Home</a>
+</body>
+</html>

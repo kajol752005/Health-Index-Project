@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City Health Information</title>
+</head>
+<body>
+    <h1>Health Information for {{ weather_data.name }}</h1>
+    
+    <h2>City Data:</h2>
+    <p>Population: {{ city_data[0] }}</p>
+    <p>Common Health Diseases: {{ city_data[1] }}</p>
+    <p>Recommended Health Checkups: {{ city_data[2] }}</p>
+    
+    <h2>Weather Data:</h2>
+    <p>Temperature: {{ weather_data.main.temp }}°C</p>
+    <p>Weather-related Diseases: {{ weather_disease_data[0] }}</p>
+    <p>Recommended Health Checkups: {{ weather_disease_data[1] }}</p>
+    
+    <h2>Air Quality Data:</h2>
+    <p>AQI: {{ air_quality_data.aqi }}</p>
+    <p>Category: {{ air_quality_data.category }}</p>
+    <p>AQI-related Diseases: {{ aqi_disease_data[0] }}</p>
+    <p>Recommended Health Checkups: {{ aqi_disease_data[1] }}</p>
+</body>
+</html>
