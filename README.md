@@ -1,0 +1,1 @@
+This Flask application enables users to input personal details, verify their identity via OTP, and access localised environmental data, including the Air Quality Index, weather conditions, and population statistics. Users can explore health risks and recommended checkups related to these conditions and view their phone number's history within the app.
